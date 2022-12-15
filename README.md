@@ -1,1 +1,1 @@
-# NeurImg-HDR-
+# NeurImg-HDR+
