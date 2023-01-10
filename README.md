@@ -41,7 +41,7 @@ python test.py --dataroot datasets/event_video_dataset/ --im_type event --datase
 
 ### Tone mapping
 
-You can run `./reinhard_tonamap.py` to get 8-bit tonemapped HDR images from $.exr$ files using the following command ($e.g.$, for spike-based video):
+You can run `./reinhard_tonamap.py` to get 8-bit tonemapped HDR images from $.exr$ files using the following command ( $e.g.$, for spike-based video):
 ```
 python reinhard_tonemap.py -i spike_video
 ```
