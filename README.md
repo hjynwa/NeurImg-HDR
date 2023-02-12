@@ -1,7 +1,7 @@
 # NeurImg-HDR
 ## Introduction
 
-This repo contains the code and dataset for **Hybrid High Dynamic Range Imaging fusing Neuromorphic and Conventional Images** (TPAMI 2022 [[Paper](https://drive.google.com/file/d/1gfdc9axSIHO3OOIXL6yTCGljj1l54gqO/view?usp=sharing)]), which is extended from **Neuromorphic Camera Guided High Dynamic Range Imaging** (CVPR 2020 [[Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Han_Neuromorphic_Camera_Guided_High_Dynamic_Range_Imaging_CVPR_2020_paper.pdf)]).
+This repo contains the code and dataset for **Hybrid High Dynamic Range Imaging fusing Neuromorphic and Conventional Images** (TPAMI 2023 [[Paper](https://drive.google.com/file/d/1gfdc9axSIHO3OOIXL6yTCGljj1l54gqO/view?usp=sharing)]), which is extended from **Neuromorphic Camera Guided High Dynamic Range Imaging** (CVPR 2020 [[Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Han_Neuromorphic_Camera_Guided_High_Dynamic_Range_Imaging_CVPR_2020_paper.pdf)]).
 
 
 ### Pipeline
@@ -65,10 +65,10 @@ If you find the papers are useful for your research, please cite our papers as f
   year={2020}
 }
 
-@article{han2022neurimg-hdr,
+@article{han2023neurimg-hdr,
   title={Hybrid High Dynamic Range Imaging fusing Neuromorphic and Conventional Images},
   author={Han, Jin and Yang, Yixin and Duan, Peiqi and Zhou, Chu and Ma, Lei and Xu, Chao and Huang, Tiejun and Sato, Imari and Shi, Boxin},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2022}
+  year={2023}
 }
 ```
