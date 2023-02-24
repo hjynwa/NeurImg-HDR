@@ -19,6 +19,7 @@ We use `python 3.7.9` and `pytorch 1.11.0` for our code, the other dependencies 
 ### Pretrained models
 
 Please download the pretrained models from the following link, and uncompress it into `./checkpoints` folder.
+
 [[Google Drive](https://drive.google.com/file/d/1rexQxWZQ24fNa9I5btUSmvvsAm8VCXor/view?usp=share_link)] [[Baidu Yun](https://pan.baidu.com/s/1_W04p9EC1Kn1Z6yJFroM9w?pwd=6fnv)] (430.9 MB in total)
 
 ### Inference
