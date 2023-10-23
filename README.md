@@ -1,7 +1,7 @@
 # NeurImg-HDR
 ## Introduction
 
-This repo contains the code and dataset for **Hybrid High Dynamic Range Imaging fusing Neuromorphic and Conventional Images** (TPAMI 2023 [[Paper](https://drive.google.com/file/d/1gfdc9axSIHO3OOIXL6yTCGljj1l54gqO/view?usp=sharing)]), which is extended from **Neuromorphic Camera Guided High Dynamic Range Imaging** (CVPR 2020 [[Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Han_Neuromorphic_Camera_Guided_High_Dynamic_Range_Imaging_CVPR_2020_paper.pdf)]).
+This repo contains the code and dataset for **Hybrid High Dynamic Range Imaging fusing Neuromorphic and Conventional Images** (TPAMI 2022 [[Paper](https://drive.google.com/file/d/1gfdc9axSIHO3OOIXL6yTCGljj1l54gqO/view?usp=sharing)]), which is extended from **Neuromorphic Camera Guided High Dynamic Range Imaging** (CVPR 2020 [[Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Han_Neuromorphic_Camera_Guided_High_Dynamic_Range_Imaging_CVPR_2020_paper.pdf)]).
 
 
 ### Pipeline
@@ -19,30 +19,48 @@ We use `python 3.7.9` and `pytorch 1.11.0` for our code, the other dependencies 
 ### Pretrained models
 
 Please download the pretrained models from the following link, and uncompress it into `./checkpoints` folder.
+[[Google Drive](https://drive.google.com/file/d/1rexQxWZQ24fNa9I5btUSmvvsAm8VCXor/view?usp=share_link)] (430.9 MB in total)
 
-[[Google Drive](https://drive.google.com/file/d/1rexQxWZQ24fNa9I5btUSmvvsAm8VCXor/view?usp=share_link)] [[Baidu Yun](https://pan.baidu.com/s/1_W04p9EC1Kn1Z6yJFroM9w?pwd=6fnv)] (430.9 MB in total)
+### Training
+We apply phase-to-phase training strategy to train the Luminance Fusion Network (trained on images solely) and the Chrominance Compensation Network (trained on images and videos respectively). 
+
+To train the Luminance Fusion Network on images, run the following command:
+```
+python train.py --dataroot ./datasets/your_image_dataset --name training_LFN --model lfn  --dataset_mode trainimage --loss_type l1+perc
+```
+Put the pretrained Luminance Fusion Network `luminance_fusion_net.pth` in `./checkpoints/pretrained_lfn_dir/` folder. Then train the Chrominance Compensation Network.
+
+To train the Chrominance Compensation Network on images, run the following command:
+```
+python train.py --dataroot ./datasets/your_image_dataset --name training_on_images --model image  --dataset_mode trainimage --netColor image --loss_type l1+perc+gan --pretrained_lfn ./checkpoints/pretrained_lfn_dir
+```
+
+To train the Chrominance Compensation Network on videos, run the following command:
+```
+python train.py --dataroot ./datasets/your_video_dataset  --name training_on_videos --model video --dataset_mode trainvideo --netColor video  --loss_type l1+perc --pretrained_lfn ./checkpoints/pretrained_lfn_dir
+```
 
 ### Inference
 
 To test on images, run the following command:
 ```
-python test.py --dataroot datasets/image_dataset --im_type spike --dataset_mode test  --model image --name image --netColor image
+python test.py --dataroot ./datasets/image_dataset --im_type spike --dataset_mode test  --model image --name image --netColor image
 ```
 
 To test on spike-based videos, run the following command:
 ```
-python test.py --dataroot datasets/spike_video_dataset --im_type spike --dataset_mode test --model video --name spike_video --netColor video
+python test.py --dataroot ./datasets/spike_video_dataset --im_type spike --dataset_mode test --model video --name spike_video --netColor video
 ```
 
 To test on event-based videos, run the following command:
 ```
-python test.py --dataroot datasets/event_video_dataset/ --im_type event --dataset_mode test --model video --name event_video --netColor video --state_nc 32
+python test.py --dataroot ./datasets/event_video_dataset/ --im_type event --dataset_mode test --model video --name event_video --netColor video --state_nc 32
 ```
 
 
 ### Tone mapping
 
-You can run `./reinhard_tonamap.py` to get 8-bit tonemapped HDR images from $.exr$ files using the following command ( $e.g.$, for spike-based video):
+You can run `./reinhard_tonamap.py` to get 8-bit tonemapped HDR images from $.exr$ files using the following command ($e.g.$, for spike-based video):
 ```
 python reinhard_tonemap.py -i spike_video
 ```
@@ -52,7 +70,7 @@ python reinhard_tonemap.py -i spike_video
 We use the hybrid camera to capture various scenarios and build our **H**ybrid **E**vent \& **S**pike **HDR** (**HES-HDR**) dataset. There are 20 video pairs, including 10 videos captured using the event camera (DAVIS346) and 10 videos captured using the spike camera (Vidar). The dataset covers both indoor and outdoor HDR scenarios with camera motion or/and scene motion. All the RGB frames are provided in $.jpg$ format. Event data are provided in stream-like $.txt$ format, and spike data are provided in spike frame-like $.npz$ format.
 The dataset can be downloaded from the following link:
 
-[[Google Drive](https://drive.google.com/drive/folders/1k__TuaCsQismYzfgEszjYLPuDPf41M44?usp=share_link)] [[Baidu Yun](https://pan.baidu.com/s/1DCUw0s9JY5UwAOzaXSe2aA?pwd=rypy)] (23.58 GB in total)
+[[Google Drive](https://drive.google.com/file/d/1rAko_TSqdBs0Hg9XLZLISfGiMtsx_PrE/view?usp=share_link)] (23.58 GB in total)
 
 
 ## Citation
@@ -66,10 +84,10 @@ If you find the papers are useful for your research, please cite our papers as f
   year={2020}
 }
 
-@article{han2023neurimg-hdr,
+@article{han2022neurimg-hdr,
   title={Hybrid High Dynamic Range Imaging fusing Neuromorphic and Conventional Images},
   author={Han, Jin and Yang, Yixin and Duan, Peiqi and Zhou, Chu and Ma, Lei and Xu, Chao and Huang, Tiejun and Sato, Imari and Shi, Boxin},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2023}
+  year={2022}
 }
 ```
