@@ -79,7 +79,7 @@ class TestDataset(BaseDataset):
         ldr_crop = ldr_crop / 255.0
         # ldr_crop = ((ldr_crop)**2.2)
         ldr_norm = (ldr_crop*2.0-1.0).astype(np.float32)
-        ldr_rgb = transforms.ToTensor()(ldr_norm)
+        data_ldr_rgb = transforms.ToTensor()(ldr_norm)
 
         ldr_yuv = cv2.cvtColor(ldr_crop, cv2.COLOR_RGB2YUV)
         ldr_y = ldr_yuv[:,:,0] # [0.0, 1.0]
@@ -91,7 +91,7 @@ class TestDataset(BaseDataset):
         data_ldr_u = transforms.ToTensor()(ldr_u)
         data_ldr_v = transforms.ToTensor()(ldr_v)
         
-        return {'input_ldr_y': data_ldr_y, 'input_ldr_u': data_ldr_u, 'input_ldr_v': data_ldr_v, 'input_ldr_rgb': ldr_rgb, 'input_im': im_tensor, 'paths': ldr_path,
+        return {'input_ldr_y': data_ldr_y, 'input_ldr_u': data_ldr_u, 'input_ldr_v': data_ldr_v, 'input_ldr_rgb': data_ldr_rgb, 'input_im': im_tensor, 'paths': ldr_path,
                 'im_h_pad': im_h_pad, 'im_w_pad': im_w_pad}
 
 

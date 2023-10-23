@@ -81,7 +81,7 @@ def get_pairwise_transform(opt, params=None, convert=True):
     transform_list = []
 
     if 'resize' in opt.preprocess:
-        osize = (opt.load_size, opt.load_size)
+        osize = (opt.load_size[0], opt.load_size[0])
         transform_list.append(transforms.Lambda(lambda img: cv2.resize(img, osize)))
     elif 'scale_width' in opt.preprocess:
         transform_list.append(transforms.Lambda(lambda img: __scale_width(img, opt.load_size)))
@@ -92,10 +92,6 @@ def get_pairwise_transform(opt, params=None, convert=True):
 
     if opt.preprocess == 'none':
         transform_list.append(transforms.Lambda(lambda img: __make_power_22(img, base=4)))
-
-    if not opt.no_flip:
-        if params is None:
-            transform_list.append(transforms.Lambda(lambda img: __random_flip(img)))
 
     if convert:
         transform_list.append(transforms.ToTensor())
