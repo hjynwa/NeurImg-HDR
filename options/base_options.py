@@ -25,18 +25,24 @@ class BaseOptions():
         parser.add_argument('--norm', type=str, default='instance', help='instance normalization or batch normalization [instance | batch | none]')
         parser.add_argument('--init_type', type=str, default='normal', help='network initialization [normal | xavier | kaiming | orthogonal]')
         parser.add_argument('--init_gain', type=float, default=0.02, help='scaling factor for normal, xavier and orthogonal.')
-        parser.add_argument('--no_dropout', action='store_true', help='no dropout for the generator')
+        # parser.add_argument('--no_dropout', action='store_true', help='no dropout for the generator')
+        parser.add_argument('--loss_type', type=str, default='l1+perc+gan', help='use all losses G_GAN, G_L1, D_real, D_fake or just L1 loss. ')
         parser.add_argument('--up_scale', type=int, default=2, help='upsample scale of upsampling network.')
         
         # dataset parameters
         parser.add_argument('--dataset_mode', type=str, default='test', help='chooses how datasets are loaded.')
         parser.add_argument('--serial_batches', action='store_true', help='if true, takes images in order to make batches, otherwise takes them randomly')
         parser.add_argument('--num_threads', default=4, type=int, help='# threads for loading data')
-        parser.add_argument('--batch_size', type=int, default=1, help='input batch size')
+        parser.add_argument('--batch_size', type=int, default=2, help='input batch size')
         parser.add_argument('--max_dataset_size', type=int, default=float("inf"), help='Maximum number of samples allowed per dataset. If the dataset directory contains more than max_dataset_size, only a subset is loaded.')
-        parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the images for data augmentation')
+        parser.add_argument('--resolution', type=int, default=512, help='resolution of LDR image.')
+        # parser.add_argument('--crop_size', nargs='+', type=int, help='then crop to this size')
+        parser.add_argument('--load_size', nargs='+', type=int)
+        parser.add_argument('--preprocess', type=str, default='resize', help='scaling and cropping of images at load time [resize_and_crop | crop | scale_width | scale_width_and_crop | none]')
         
         # additional parameters
+        parser.add_argument('--continue_train', action='store_true', help='continue training: load the latest model')
+        parser.add_argument('--epoch_count', type=int, default=1, help='the starting epoch count, we save the model by <epoch_count>, <epoch_count>+<save_latest_freq>, ...')
         parser.add_argument('--epoch', type=str, default='latest', help='which epoch to load? set to latest to use latest cached model')
         parser.add_argument('--load_iter', type=int, default='0', help='which iteration to load? if load_iter > 0, the code will load models by iter_[load_iter]; otherwise, the code will load models by [epoch]')
         parser.add_argument('--verbose', action='store_true', help='if specified, print more debugging information')

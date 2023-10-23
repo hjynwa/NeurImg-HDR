@@ -47,6 +47,13 @@ def hdr2tonemapped(hdr_img):
     return (tonemapped*255).astype(np.uint8)
 
 
+def tensor_tonemap(image_tensor):
+    # Input shape: [batch_size, channels, height, width]
+    tonemapped = torch.log1p(5000.0*image_tensor) / torch.log1p(torch.tensor(5000.0).cuda())
+    
+    return tonemapped
+    
+
 def tensor2im(input_image, imtype=np.uint8):
     if not isinstance(input_image, np.ndarray):
         if isinstance(input_image, torch.Tensor):  # get the data from a variable
