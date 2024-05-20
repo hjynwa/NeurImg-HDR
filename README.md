@@ -60,7 +60,7 @@ python test.py --dataroot ./datasets/event_video_dataset/ --im_type event --data
 
 ### Tone mapping
 
-First, you should install Luminance-HDR-CLI by running `apt-get install luminance-hdr`.
+First, you should install Luminance-HDR-CLI by this command: `apt-get install luminance-hdr`.
 Then, you can run `./reinhard_tonamap.py` to get 8-bit tonemapped HDR images from $.exr$ files using the following command ($e.g.$, for spike-based video):
 ```
 python reinhard_tonemap.py -i spike_video
