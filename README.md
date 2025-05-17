@@ -19,7 +19,7 @@ We use `python 3.7.9` and `pytorch 1.11.0` for our code, the other dependencies 
 ### Pretrained models
 
 Please download the pretrained models from the following link, and uncompress it into `./checkpoints` folder.
-[[Google Drive](https://drive.google.com/file/d/1rexQxWZQ24fNa9I5btUSmvvsAm8VCXor/view?usp=share_link)] (430.9 MB in total)
+[[Google Drive](https://drive.google.com/file/d/12Qp3rZs6jXj0nMEQAOw9cXEKfboXX_sW/view?usp=sharing)] (430.9 MB in total)
 
 ### Training
 We apply phase-to-phase training strategy to train the Luminance Fusion Network (trained on images solely) and the Chrominance Compensation Network (trained on images and videos respectively). 
